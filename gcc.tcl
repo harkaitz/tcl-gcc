@@ -1,5 +1,5 @@
 package provide gcc 0.1
-package require md5 2.0.7
+package require md5
 
 namespace eval ::gcc {
 
@@ -27,7 +27,7 @@ namespace eval ::gcc {
             if {[info exists env(TCL_GCC_VERBOSE)]} {
                 puts stderr [list {*}$cc -o $prog {*}$files {*}$flags]
             }
-            exec {*}$cc -o $prog {*}$files {*}$flags
+            exec 2>@ stderr {*}$cc -o $prog {*}$files {*}$flags
         }
         set code [list exec {*}$execs $prog]
         set code [list proc $name { args } "$code {*}\$args"]
